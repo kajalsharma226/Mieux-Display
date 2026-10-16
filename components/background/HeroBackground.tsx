@@ -57,8 +57,8 @@ export function HeroBackground() {
             contrast={1.2}
             perspective={0.12}
             fog={0.2}
-            interactive={false}
-            intro={false}
+            interactive={true}
+            intro={true}
             paused={paused || reducedMotion}
           />
         )}

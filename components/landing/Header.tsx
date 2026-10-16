@@ -22,6 +22,12 @@ export function Header() {
   return (
     <>
       <header className="header" id="top">
+        <div className="grid-lines" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+          <i />
+        </div>
         <a className="wordmark" href="#top" aria-label="Mieux home">
           Mieux
         </a>

@@ -57,13 +57,19 @@ function Grid() {
     </div>
   );
 }
-function Crosses({ bottom = false }: { bottom?: boolean }) {
+function Crosses({
+  bottom = false,
+  count = 5,
+}: {
+  bottom?: boolean;
+  count?: number;
+}) {
   return (
     <div
       className={`crosses ${bottom ? "crosses-bottom" : ""}`}
       aria-hidden="true"
     >
-      {[0, 1, 2, 3, 4].map((i) => (
+      {Array.from({ length: count }, (_, i) => (
         <span key={i}>+</span>
       ))}
     </div>
@@ -154,27 +160,31 @@ export default function Home() {
               <Grid />
               <Crosses />
               <aside className="video-card">
+                <Crosses count={2} />
                 <div className="video-card-meta mono">
                   <span>HOW MIEUX WORKS</span>
                   <span>◉ 1:30</span>
                 </div>
                 <h3>DISPLAY SOLUTIONS FOR YOUR NEEDS</h3>
-                <a
-                  className="video-link"
-                  href="https://www.youtube.com/@mieuxdisplayprivatelimited"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Watch Mieux display demonstrations on YouTube (opens a new tab)"
-                >
-                  <Image
-                    src="/images/how-mieux-works.png"
-                    width={228}
-                    height={131}
-                    alt="Mieux display demonstration at an exhibition"
-                    sizes="(max-width: 700px) 85vw, 24vw"
-                  />
-                  <span className="video-link-note">WATCH ON YOUTUBE ↗</span>
-                </a>
+                <div className="video-preview">
+                  <a
+                    className="video-link"
+                    href="https://www.youtube.com/@mieuxdisplayprivatelimited"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Watch Mieux display demonstrations on YouTube (opens a new tab)"
+                  >
+                    <Image
+                      src="/images/how-mieux-works.png"
+                      width={228}
+                      height={131}
+                      alt="Mieux display demonstration at an exhibition"
+                      sizes="(max-width: 700px) 85vw, 24vw"
+                    />
+                    <span className="video-link-note">WATCH ON YOUTUBE ↗</span>
+                  </a>
+                  <Crosses bottom count={2} />
+                </div>
                 <p className="mono video-description">
                   LOREM IPSUM IS SIMPLY DUMMY TEXT OF THE PRINTING AND
                   TYPESETTING INDUSTRY.{" "}
@@ -500,7 +510,9 @@ export default function Home() {
           </section>
         </main>
 
-        <div className="footer-spacer" />
+        <div className="footer-spacer grid-section" aria-hidden="true">
+          <Grid />
+        </div>
         <footer className="footer grid-section">
           <Grid />
           <Crosses />
