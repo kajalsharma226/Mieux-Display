@@ -2,6 +2,7 @@ import Image from "next/image";
 import { HeroBackground } from "@/components/background/HeroBackground";
 import { ContactForm } from "@/components/landing/ContactForm";
 import { Header } from "@/components/landing/Header";
+import { ScrollMotion } from "@/components/motion/ScrollMotion";
 
 const lorem =
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since 1966, when designers at Letraset and James Mosley, the librarian at St Bride Printing Library";
@@ -78,12 +79,20 @@ function Crosses({
 function Label({
   number,
   children,
+  reveal = false,
+  delay,
 }: {
   number: string;
   children: React.ReactNode;
+  reveal?: boolean;
+  delay?: number;
 }) {
   return (
-    <p className="section-label mono">
+    <p
+      className="section-label mono"
+      data-reveal={reveal ? "" : undefined}
+      data-reveal-delay={delay}
+    >
       <span className="label-dot" />
       <span>{number}</span>
       <span>{children}</span>
@@ -123,6 +132,7 @@ export default function Home() {
       </a>
       <div className="site-shell">
         <Header />
+        <ScrollMotion />
         <main id="main">
           <section className="hero" aria-labelledby="hero-title">
             <HeroBackground />
@@ -160,7 +170,7 @@ export default function Home() {
             >
               <Grid />
               <Crosses />
-              <aside className="video-card">
+              <aside className="video-card" data-reveal>
                 <Crosses count={2} />
                 <div className="video-card-meta mono">
                   <span>HOW MIEUX WORKS</span>
@@ -196,8 +206,10 @@ export default function Home() {
                 </p>
               </aside>
               <div className="about-copy">
-                <Label number="01">WHO WE ARE</Label>
-                <h2 id="about-title">
+                <Label number="01" reveal>
+                  WHO WE ARE
+                </Label>
+                <h2 id="about-title" data-reveal="blur" data-reveal-delay={1}>
                   AT MIEUX DISPLAY, WE
                   <br />
                   CREATE ADVANCED
@@ -220,7 +232,7 @@ export default function Home() {
                   <br />
                   SECTOR.
                 </h2>
-                <div className="brand-signature">
+                <div className="brand-signature" data-reveal data-reveal-delay={2}>
                   <span aria-hidden="true" />
                   <p className="mono">
                     MIEUX
@@ -239,7 +251,7 @@ export default function Home() {
               <Grid />
               <Crosses />
               <div className="products-heading">
-                <div>
+                <div data-reveal>
                   <Label number="02">PRODUCTS</Label>
                   <h2 id="products-title">
                     <span>
@@ -253,7 +265,7 @@ export default function Home() {
                     EXPERIENCES
                   </h2>
                 </div>
-                <div className="products-intro">
+                <div className="products-intro" data-reveal data-reveal-delay={1}>
                   <p>{lorem}</p>
                   <a href="#contact" className="button button-primary">
                     ENQUIRE
@@ -262,11 +274,20 @@ export default function Home() {
               </div>
               <div className="product-list">
                 {products.map((name, index) => (
-                  <article className="product-row" key={index}>
+                  <article
+                    className="product-row"
+                    data-reveal
+                    data-reveal-delay={index % 3}
+                    key={index}
+                  >
                     <Crosses />
                     <span className="product-index">/0{index + 1}</span>
                     <h3>{name}</h3>
-                    <div className="product-swatch" aria-hidden="true" />
+                    <div
+                      className="product-swatch"
+                      data-hover-zoom="self"
+                      aria-hidden="true"
+                    />
                     <div className="product-details mono">
                       <p>{productDescription}</p>
                       <p className="product-industries">
@@ -289,8 +310,10 @@ export default function Home() {
           >
             <Grid />
             <div className="advantages-title">
-              <Label number="03">WHY US?</Label>
-              <h2 id="advantages-title">
+              <Label number="03" reveal>
+                WHY US?
+              </Label>
+              <h2 id="advantages-title" data-reveal data-reveal-delay={1}>
                 <span>
                   WHY
                   <br />
@@ -303,12 +326,17 @@ export default function Home() {
               </h2>
             </div>
             <div className="advantages-list">
-              <h3>
+              <h3 data-reveal>
                 OUR ADVANTAGES <span>INCLUDE:</span>
               </h3>
               <ol>
                 {advantages.map((text, index) => (
-                  <li className="mono" key={index}>
+                  <li
+                    className="mono"
+                    data-reveal
+                    data-reveal-delay={index + 1}
+                    key={index}
+                  >
                     <span className="advantage-number">0{index + 1}</span>
                     <span>{text}</span>
                   </li>
@@ -323,8 +351,8 @@ export default function Home() {
           >
             <Grid />
             <div className="feature-stats">
-              {["3×", "99%", "+28%"].map((value) => (
-                <div key={value}>
+              {["3×", "99%", "+28%"].map((value, index) => (
+                <div data-reveal data-reveal-delay={index} key={value}>
                   <strong>{value}</strong>
                   <span className="mono">
                     FASTER
@@ -335,13 +363,15 @@ export default function Home() {
               ))}
             </div>
             <div className="feature-copy">
-              <Label number="04">LOREM IPSUM</Label>
-              <h2 id="feature-title">
+              <Label number="04" reveal>
+                LOREM IPSUM
+              </Label>
+              <h2 id="feature-title" data-reveal data-reveal-delay={1}>
                 LOREM IPSUM IS
                 <br />
                 SIMPLY DUMMY TEXT
               </h2>
-              <p>
+              <p data-reveal data-reveal-delay={2}>
                 Lorem Ipsum is simply dummy text of the printing and
                 <br className="desktop-break" /> typesetting industry. Lorem
                 Ipsum has been the industry’.
@@ -350,6 +380,7 @@ export default function Home() {
             <div className="feature-glow" aria-hidden="true" />
             <Image
               className="led-wall"
+              data-hover-zoom="self"
               src="/images/led-wall.png"
               width={2104}
               height={2104}
@@ -365,7 +396,7 @@ export default function Home() {
           >
             <Grid />
             <div className="case-copy">
-              <div className="case-intro">
+              <div className="case-intro" data-reveal>
                 <Label number="05">RESULTS</Label>
                 <h2 id="case-title">CASE STUDY</h2>
                 <p>
@@ -375,7 +406,7 @@ export default function Home() {
                   been the industry’.
                 </p>
               </div>
-              <dl className="case-facts mono">
+              <dl className="case-facts mono" data-reveal data-reveal-delay={1}>
                 <div>
                   <dt>DATE</dt>
                   <dd>OCT 2027</dd>
@@ -392,13 +423,18 @@ export default function Home() {
                   </dd>
                 </div>
               </dl>
-              <h3>
+              <h3 data-reveal data-reveal-delay={2}>
                 MIEUX&apos;S SMART DISPLAY SOLUTIONS ENHANCED VISUAL CLARITY,
                 SIMPLIFIED COLLABORATION, AND CREATED MORE INTERACTIVE
                 EXPERIENCES.
               </h3>
             </div>
-            <div className="case-art">
+            <div
+              className="case-art"
+              data-reveal
+              data-reveal-delay={1}
+              data-hover-zoom="image"
+            >
               <Image
                 className="case-image"
                 src="/images/case-study.png"
@@ -416,8 +452,10 @@ export default function Home() {
           >
             <Grid />
             <Crosses />
-            <Label number="06">FEATURED</Label>
-            <h2 id="showcase-title">
+            <Label number="06" reveal>
+              FEATURED
+            </Label>
+            <h2 id="showcase-title" data-reveal data-reveal-delay={1}>
               LOREM IPSUM IS
               <br />
               SIMPLY DUMMY TEXT
@@ -425,6 +463,7 @@ export default function Home() {
             <div className="showcase-glow" aria-hidden="true" />
             <Image
               className="showcase-panel"
+              data-hover-zoom="self"
               src="/images/interactive-panel.png"
               width={431}
               height={289}
@@ -439,7 +478,7 @@ export default function Home() {
             aria-labelledby="impact-title"
           >
             <Grid />
-            <div className="impact-intro">
+            <div className="impact-intro" data-reveal>
               <Label number="07">OUR IMPACT</Label>
               <h2 id="impact-title">
                 <span>
@@ -455,7 +494,12 @@ export default function Home() {
               <Reviews />
             </div>
             {[0, 1, 2].map((index) => (
-              <div className="impact-column" key={index}>
+              <div
+                className="impact-column"
+                data-reveal
+                data-reveal-delay={index + 1}
+                key={index}
+              >
                 <p className="impact-strip mono">
                   NATIONWIDE PRESENCE <span aria-hidden="true">+</span>
                 </p>
@@ -483,7 +527,7 @@ export default function Home() {
             aria-labelledby="contact-title"
           >
             <Grid />
-            <div className="contact-copy">
+            <div className="contact-copy" data-reveal>
               <Label number="07">GET IN TOUCH</Label>
               <h2 id="contact-title">
                 LET&apos;S FIND THE
@@ -501,6 +545,8 @@ export default function Home() {
             </div>
             <Image
               className="contact-specialist"
+              data-reveal
+              data-reveal-delay={1}
               src="/images/display-specialist.png"
               width={358}
               height={451}

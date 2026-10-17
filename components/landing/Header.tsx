@@ -29,7 +29,13 @@ export function Header() {
           <i />
         </div>
         <a className="wordmark" href="#top" aria-label="Mieux home">
-          Mieux
+          <Image
+            src="/images/logo.png"
+            width={67.15596008300781}
+            height={60}
+            alt="Mieux"
+            priority
+          />
         </a>
         <button
           className="menu-trigger mono"

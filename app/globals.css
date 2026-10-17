@@ -9,6 +9,10 @@
   --line-light: rgba(255, 255, 255, 0.07);
   --header-height: 120px;
   --gutter: 30px;
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --reveal-duration: 1450ms;
+  --hover-duration: 340ms;
+  --reveal-delay: 0ms;
 }
 * {
   box-sizing: border-box;
@@ -445,6 +449,46 @@ h3 {
     transform: translateY(0);
   }
 }
+/* Applied only after the client observer is ready, avoiding a hidden SSR paint. */
+html[data-motion="ready"] [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 38px, 0);
+  transition:
+    opacity var(--reveal-duration) var(--motion-ease) var(--reveal-delay),
+    transform var(--reveal-duration) var(--motion-ease) var(--reveal-delay);
+  will-change: opacity, transform;
+}
+html[data-motion="ready"] [data-reveal].is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  will-change: auto;
+}
+html[data-motion="ready"] [data-reveal="blur"] {
+  filter: blur(8px);
+  transition:
+    opacity 1200ms var(--motion-ease) var(--reveal-delay),
+    transform 1200ms var(--motion-ease) var(--reveal-delay),
+    filter 1200ms var(--motion-ease) var(--reveal-delay);
+  will-change: opacity, transform, filter;
+}
+html[data-motion="ready"] [data-reveal="blur"].is-revealed {
+  filter: blur(0);
+}
+[data-reveal-delay="1"] {
+  --reveal-delay: 90ms;
+}
+[data-reveal-delay="2"] {
+  --reveal-delay: 180ms;
+}
+[data-reveal-delay="3"] {
+  --reveal-delay: 270ms;
+}
+[data-reveal-delay="4"] {
+  --reveal-delay: 360ms;
+}
+[data-reveal-delay="5"] {
+  --reveal-delay: 450ms;
+}
 .motion-toggle {
   position: absolute;
   bottom: 24px;
@@ -603,10 +647,7 @@ h3 {
 }
 .video-link img {
   width: 100%;
-  transition: transform 0.3s;
-}
-.video-link:hover img {
-  transform: scale(1.025);
+  transform-origin: center;
 }
 .video-link-note {
   position: absolute;
@@ -624,6 +665,23 @@ h3 {
 .video-link:hover .video-link-note,
 .video-link:focus-visible .video-link-note {
   opacity: 1;
+}
+@media (hover: hover) and (pointer: fine) {
+  .video-link img,
+  [data-hover-zoom="self"],
+  [data-hover-zoom="image"] > img {
+    transform-origin: center;
+    transition: transform var(--hover-duration) var(--motion-ease);
+  }
+  .video-link:hover img,
+  .video-link:focus-visible img,
+  [data-hover-zoom="self"]:hover,
+  [data-hover-zoom="image"]:hover > img {
+    transform: scale(0.975);
+  }
+}
+[data-hover-zoom="image"] {
+  overflow: clip;
 }
 .video-description {
   padding: 20px 0;
@@ -2301,5 +2359,11 @@ h3 {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  html[data-motion] [data-reveal],
+  html[data-motion] [data-reveal="blur"] {
+    opacity: 1;
+    filter: none;
+    transform: none;
   }
 }

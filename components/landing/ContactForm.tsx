@@ -25,7 +25,7 @@ export function ContactForm() {
   }
 
   return (
-    <form className="contact-form" onSubmit={prepareEnquiry}>
+    <form className="contact-form" data-reveal data-reveal-delay={2} onSubmit={prepareEnquiry}>
       <label htmlFor="name">
         NAME
         <input
