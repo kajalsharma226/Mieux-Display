@@ -698,6 +698,10 @@ h3 {
 }
 .products-intro > .button {
   margin-top: 74px;
+  width: 92px;
+  min-height: 48px;
+  height: 48px;
+  padding: 15px 18px;
 }
 .product-row {
   display: grid;
