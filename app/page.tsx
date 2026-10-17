@@ -126,6 +126,7 @@ export default function Home() {
         <main id="main">
           <section className="hero" aria-labelledby="hero-title">
             <HeroBackground />
+            <Grid />
             <div className="hero-content">
               <Reviews light />
               <h1 id="hero-title">
@@ -517,7 +518,13 @@ export default function Home() {
           <Grid />
           <Crosses />
           <div className="footer-wordmark" aria-hidden="true">
-            Mieux
+            <Image
+              src="/images/Vector.svg"
+              alt=""
+              width={1380}
+              height={349}
+              unoptimized
+            />
           </div>
           <nav aria-label="Social media" className="social-links mono">
             <a

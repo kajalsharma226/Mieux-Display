@@ -4,7 +4,7 @@ import "./globals.css";
 
 const mono = IBM_Plex_Mono({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["500"],
   variable: "--font-ibm-plex-mono",
   display: "swap",
 });
@@ -16,7 +16,7 @@ const sora = Sora({
 });
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["500"],
   variable: "--font-poppins",
   display: "swap",
 });

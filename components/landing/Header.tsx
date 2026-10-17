@@ -49,22 +49,27 @@ export function Header() {
             <br />
             NEXT STEPS. <strong>ZERO OBLIGATIONS</strong>
           </span>
-          <Image
-            src="/images/advisor.png"
-            width={64}
-            height={64}
-            alt="Your display advisor"
-            className="advisor"
-          />
+          <span className="advisor">
+            <Image
+              src="/images/advisor.png"
+              width={68}
+              height={68}
+              alt="Your display advisor"
+            />
+          </span>
           <span className="headset" aria-hidden="true">
             <svg
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              <path d="M4 13v-2a8 8 0 0 1 16 0v2M4 12H3v6h4v-6H4Zm16 0h1v6h-4v-6h3Zm0 6c0 3-3 3-6 3" />
-              <path d="M10 20h4v2h-4" />
+              <path d="M3 13v-2a9 9 0 0 1 18 0v2" />
+              <rect x="3" y="11" width="5" height="8" rx="2" />
+              <rect x="16" y="11" width="5" height="8" rx="2" />
+              <path d="M21 17v3a2 2 0 0 1-2 2h-6" />
             </svg>
           </span>
         </a>
