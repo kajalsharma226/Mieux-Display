@@ -94,3 +94,4 @@ Figma's public canvas is viewable, but its detailed inspection, presentation, an
 
 The source ZIP excludes `node_modules`, `.next`, and build caches. Verification screenshots are included. Local preview processes are stopped after QA; run the commands above to launch your own demonstration.
 # Mieux-Display
+# mux-display
